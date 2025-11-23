@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
 
-def sitemap_to_excel(sitemap_url, output_file='sitemap_sites.xlsx'):
+def sitemap_to_excel(sitemap_url, output_file='sitemap_aces.xlsx'): # Output filename
     """
     Extract all URLs from sitemap and save to Excel
     """
@@ -41,5 +41,5 @@ def sitemap_to_excel(sitemap_url, output_file='sitemap_sites.xlsx'):
         return None
 
 # Usage
-sitemap_url = "https://www.fau.de/sitemap.xml"  # Replace with your sitemap URL
+sitemap_url = "https://www.aces.study.fau.eu/sitemap.xml"  # Replace with your sitemap URL
 sitemap_to_excel(sitemap_url)

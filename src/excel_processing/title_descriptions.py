@@ -5,7 +5,7 @@ import time
 from urllib.parse import urlparse
 import re
 
-def extract_metadata_from_urls(excel_file, output_file='urls_with_metadata.xlsx', delay=1):
+def extract_metadata_from_urls(excel_file, output_file='aces_with_metadata.xlsx', delay=1):
     """
     Read URLs from Excel, extract title and description from each page
     """
@@ -216,7 +216,7 @@ def extract_detailed_metadata(excel_file, output_file='detailed_metadata.xlsx', 
 # Usage examples
 if __name__ == "__main__":
     # Replace with your actual Excel file name
-    excel_filename = "sitemap_sites.xlsx"  # Change this to your file name
+    excel_filename = "sitemap_aces.xlsx"  # Change this to your file name
     
     # Basic metadata extraction
     print("=== Basic Metadata Extraction ===")

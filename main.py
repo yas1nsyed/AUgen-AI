@@ -11,7 +11,7 @@ from llm_client import make_llm
 def main():
     """Main orchestration: cleaner_agent → llm_client"""
     
-    excel_file = Path(__file__).parent / "src/excel_processing/metadata_title_desc.xlsx"
+    excel_file = Path(__file__).parent / "/home/ubuntu/projects/FAUgen-AI/src/excel_processing/aces_metadata.xlsx"
     
     try:
         print("🚀 FAU AI Assistant")

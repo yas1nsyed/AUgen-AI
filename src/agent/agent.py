@@ -358,7 +358,7 @@ class FAUWebsiteAgent:
 # Interactive version
 def interactive_agent():
     """Run the agent in interactive mode"""
-    excel_file = r"/home/ubuntu/projects/FAUgen-AI/src/excel_processing/metadata_title_desc.xlsx"  # Replace with your file
+    excel_file = r"/home/ubuntu/projects/FAUgen-AI/src/excel_processing/aces_metadata.xlsx"  # Replace with your file
     
     try:
         print("🚀 Loading FAU Website AI Agent with Sentence Transformers...")

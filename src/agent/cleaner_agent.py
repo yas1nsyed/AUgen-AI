@@ -157,7 +157,7 @@ class FAURAGAgent:
 
 def main():
     """Main function to run the FAU RAG Agent"""
-    excel_file = "/home/ubuntu/projects/FAUgen-AI/src/excel_processing/metadata_title_desc.xlsx"
+    excel_file = "/home/ubuntu/projects/FAUgen-AI/src/excel_processing/aces_metadata.xlsx"
     
     try:
         print("🚀 Initializing FAU RAG Agent...")

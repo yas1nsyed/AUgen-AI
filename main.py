@@ -44,7 +44,7 @@ def main():
         print("[INFO] Performing RAG retrieval...")
         try:
             # Step 1: Get retrieved links + snippets from RAG
-            rag_outputs = rag_agent.rag(query, top_k=5)
+            rag_outputs = rag_agent.rag(query, top_k=10)
 
             # DEBUG: Show retrieved links
             print("\n=== Retrieved Links from VectorStore ===")

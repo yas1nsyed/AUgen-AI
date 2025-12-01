@@ -8,10 +8,17 @@ import requests
 from bs4 import BeautifulSoup
 from .embeddings import DocumentStore, EmbeddingStore
 from src.tools.scraper import WebsiteScraper
+from huggingface_hub import hf_hub_download
 
-
-INDEX_PATH = "data/embeddings.index"
-METADATA_PATH = "data/metadata.parquet"
+# Download the index and metadata from hf
+INDEX_PATH = hf_hub_download(
+    repo_id="Yas1n/RAG_AUgen-AI",
+    filename="data/embeddings.index",
+)
+METADATA_PATH = hf_hub_download(
+    repo_id="Yas1n/RAG_AUgen-AI",
+    filename="data/metadata.parquet",
+)
 
 class DocumentStore:
     def __init__(self):

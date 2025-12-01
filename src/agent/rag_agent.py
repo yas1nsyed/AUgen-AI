@@ -95,7 +95,7 @@ class RAGAgent:
         except Exception as e:
             return f"[Error fetching URL: {e}]"
 
-    def rag(self, query_text: str, top_k: int):
+    def rag(self, query_text: str, top_k: int): # Call this into main function
         """
         Retrieve links via FAISS + scrape each link's content for RAG.
         """

@@ -1,5 +1,6 @@
 import gradio as gr
 from src.llm_client import agent_manager
+from src.agent.rag_agent import RAGAgent
 
 # Model catalog for dropdowns
 MODEL_CATALOG = {
@@ -36,6 +37,43 @@ def set_provider_model(provider: str, model: str):
     except Exception as e:
         return f"Failed to setup LLM Agent"
 
+def get_answer_from_rag(user_query: str):
+    """
+        Process a user query using RAG agent and pass to LLM as input.        
+        Args:
+            user_query (str): The question of the user.
+
+        Returns:
+            response: The LLM-generated answer
+    """
+
+    if not user_query.strip():
+        return []
+    
+    rag_agent = RAGAgent()
+    rag_outputs = rag_agent.rag(user_query, top_k=5)
+    context_chunks = []
+
+    for item in rag_outputs:
+        if isinstance(item, dict):
+            context_chunks.append(item.get("content", ""))
+        else:
+            context_chunks.append(str(item))
+
+    context_text = "\n\n".join(context_chunks)
+
+    prompt = f"""
+User Question:
+{user_query}
+
+Use ONLY the provided context to answer:
+
+Context:
+{context_text}
+"""
+    response = agent_manager.interact_with_agent(prompt)
+    return response
+
 with gr.Blocks(title="AUgen AI") as demo:
     gr.Markdown("# 👁 AUgen AI — FAU Search Assistant\nAsk anything about FAU websites, programs, research, campus life, etc.")
     
@@ -70,12 +108,14 @@ with gr.Blocks(title="AUgen AI") as demo:
         )
         submit_btn = gr.Button("Send", scale=1)
         submit_btn.click(
-            fn=agent_manager.interact_with_agent,
+            fn=lambda msg: [
+                {"role": "user", "content": msg}, # display only the query
+                {"role": "assistant", "content": get_answer_from_rag(msg)[-1]["content"]}  
+            ],
             inputs=[msg],
             outputs=[chatbot]
         )
 
 
-# Launch app
 if __name__ == "__main__":
     demo.launch(debug=True)

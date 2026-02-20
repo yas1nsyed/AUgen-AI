@@ -1,10 +1,11 @@
-# 🎓 FAUgen AI — FAU Search Assistant
+# AUgen AI — FAU Search Assistant
 
-An AI-powered Retrieval-Augmented Generation (RAG) assistant for [Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)](https://www.fau.eu/). FAUgen AI lets you ask natural-language questions about FAU websites, programs, research, and campus life, and get accurate, source-cited answers powered by semantic search and large language models.
+An AI-powered Retrieval-Augmented Generation (RAG) assistant for [Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)](https://www.fau.eu/). AUgen AI lets you ask natural-language questions about FAU websites, programs, research, and campus life, and get accurate, source-cited answers powered by semantic search and large language  models.
+Currently as a proof of concept, this project only supports queries for the course of Electromolbility-ACES but is built in a scalable manner to eventually cover the entire FAU.
 
 ---
 
-## ✨ Features
+## Features
 
 - **Semantic Search** — Uses FAISS with HNSW indexing and multilingual sentence embeddings to retrieve the most relevant FAU web pages for any query.
 - **RAG Pipeline** — Fetches and chunks live page content, then re-ranks chunks by cosine similarity before passing to an LLM.
@@ -15,7 +16,7 @@ An AI-powered Retrieval-Augmented Generation (RAG) assistant for [Friedrich-Alex
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 FAUgen-AI/
@@ -42,7 +43,7 @@ FAUgen-AI/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -64,7 +65,7 @@ cd FAUgen-AI
 uv sync
 
 # Or with pip
-pip install -e .
+pip install -e 
 ```
 
 ### 3. Configure Environment Variables
@@ -76,34 +77,10 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 OPENAI_API_KEY=your_openai_api_key_here   # optional
 ```
 
----
-
-## 🗄️ Building the Vector Index
-
-Before running the assistant, you need to build the FAISS embedding index from FAU page metadata.
-
-**Step 1 — Collect URLs from a sitemap:**
-```bash
-python src/excel_processing/sitemap2excel.py
-```
-
-**Step 2 — Enrich with titles & descriptions:**
-```bash
-python src/excel_processing/title_descriptions.py
-```
-
-**Step 3 — Build the FAISS index:**
-
-In `src/agent/embeddings.py`, uncomment the last two lines and run:
-```bash
-python src/agent/embeddings.py
-```
-
-This creates `data/embeddings.index` and `data/metadata.parquet`.
 
 ---
 
-## 💬 Running the Application
+##  Running the Application
 
 ### Web UI (Gradio)
 
@@ -111,7 +88,7 @@ This creates `data/embeddings.index` and `data/metadata.parquet`.
 python app.py
 ```
 
-Opens a chat interface in your browser at `http://localhost:7860`.
+Opens a chat interface in your browser at localhost
 
 ### CLI Mode
 
@@ -123,7 +100,9 @@ Follow the prompts to select an LLM provider and start querying.
 
 ---
 
-## 🔧 LLM Providers
+##  LLM Providers
+
+Currently the following LLMs are supported by AUgen-AI. More models can also be added.
 
 | Provider | Default Model | Environment Variable |
 |---|---|---|
@@ -131,9 +110,10 @@ Follow the prompts to select an LLM provider and start querying.
 | **OpenAI** | `gpt-4` | `OPENAI_API_KEY` |
 | **Ollama** | `llama2` | *(local, no key needed)* |
 
+ 
 ---
 
-## 🧠 How It Works
+##  How It Works
 
 1. **Indexing** — FAU page URLs, titles, and descriptions are embedded using `paraphrase-multilingual-mpnet-base-v2` and stored in a FAISS HNSW index.
 2. **Retrieval** — A user query is embedded and the top-K most similar documents are retrieved from the index.
@@ -142,21 +122,7 @@ Follow the prompts to select an LLM provider and start querying.
 
 ---
 
-## 📦 Key Dependencies
-
-| Package | Purpose |
-|---|---|
-| `sentence-transformers` | Multilingual embeddings |
-| `faiss-cpu` | Fast approximate nearest-neighbor search |
-| `gradio` | Web chat UI |
-| `langchain` / `langchain-openai` | LLM integrations |
-| `google-generativeai` | Gemini API |
-| `beautifulsoup4` / `requests` | Web scraping |
-| `pandas` / `openpyxl` | Data processing |
-
----
-
-## 📄 License
+## License
 
 This project is licensed under the terms of the [LICENSE](LICENSE) file.
-An AI-Based solution for all FAU queries
+
